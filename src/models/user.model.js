@@ -66,7 +66,7 @@ userSchema.methods.comparePassword = async function (userPassword) {
   }
 };
 
-userSchema.methods.generateAccessToken = async function () {
+userSchema.methods.generateAccessToken = function () {
   try {
     return jwt.sign(
       {
@@ -77,24 +77,26 @@ userSchema.methods.generateAccessToken = async function () {
         role: this.role,
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: ACCESS_TOKEN_EXPIRY }
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
     );
   } catch (error) {
-    console.error("Error while generating Access Token");
+    console.error("Error while generating Access Token", error);
+    throw new ApiError("Error while genreation Access Token", 500);
   }
 };
 
-userSchema.methods.generateRefreshToken = async function () {
+userSchema.methods.generateRefreshToken = function () {
   try {
     return jwt.sign(
       {
         _id: this._id,
       },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: REFRESH_TOKEN_EXPIRY }
+      { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
     );
   } catch (error) {
-    console.error("Error while generating Refresh Token");
+    console.error("Error while generating Refresh Token", error);
+    throw new ApiError("Error while genreation Refresh Token", 500);
   }
 };
 
