@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import profileRouter from "./routes/profile.routes.js";
+import blogRouter from "./routes/post.routes.js";
 
 const app = express();
 
@@ -20,6 +21,9 @@ app.use(cookieParser());
 //routes
 //Authentication routes
 app.use("/blog-ger", authRouter);
+//User routes
 app.use("/blog-ger/profile", profileRouter);
+//Blog routes
+app.use("/blog-ger/post", blogRouter);
 
 export { app };
