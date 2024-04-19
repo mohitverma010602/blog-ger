@@ -43,6 +43,12 @@ const userSchema = new Schema(
     refreshToken: {
       type: String,
     },
+    blogs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "BlogPost",
+      },
+    ],
   },
   { timestamps: true }
 );

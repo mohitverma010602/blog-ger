@@ -8,9 +8,9 @@ import {
 } from "../utils/cloudinary.js";
 
 const getUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user?._id).select(
-    "-password -refreshToken"
-  );
+  const user = await User.findById(req.user?._id)
+    .populate("blogs")
+    .select("-password -refreshToken");
 
   res.status(200).json(new ApiResponse(user, "Got user profile"));
 });
@@ -24,7 +24,7 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 
   const { username, fullName, email } = req.body;
-  if (!username || !fullName || !email) {
+  if (!username && !fullName && !email) {
     throw new ApiError("Missing field", 400);
   }
 
