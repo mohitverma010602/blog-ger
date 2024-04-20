@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import profileRouter from "./routes/profile.routes.js";
 import blogRouter from "./routes/post.routes.js";
+import commentRouter from "./routes/comment.routes.js";
 
 const app = express();
 
@@ -23,7 +24,9 @@ app.use(cookieParser());
 app.use("/blog-ger", authRouter);
 //User routes
 app.use("/blog-ger/profile", profileRouter);
-//Blog routes
+//Blog routes & comment - create & get
 app.use("/blog-ger/post", blogRouter);
+//comments - update & delete
+app.use("/blog-ger/comment", commentRouter);
 
 export { app };

@@ -6,10 +6,12 @@ import { BlogPost } from "../models/blogPost.model.js";
 import { User } from "../models/user.model.js";
 
 const getAllPost = asyncHandler(async (req, res) => {
-  const posts = await BlogPost.find({}).populate({
-    path: "author",
-    select: "-password -refreshToken",
-  });
+  const posts = await BlogPost.find({})
+    .populate({
+      path: "author",
+      select: "-password -refreshToken",
+    })
+    .populate("comments");
 
   // Check if there are no posts
   if (!posts.length) {
