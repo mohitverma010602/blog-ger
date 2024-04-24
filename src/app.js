@@ -6,6 +6,7 @@ import profileRouter from "./routes/profile.routes.js";
 import blogRouter from "./routes/post.routes.js";
 import commentRouter from "./routes/comment.routes.js";
 import userInteractionRouter from "./routes/userInteraction.routes.js";
+import searchingRoutes from "./routes/search.routes.js";
 
 const app = express();
 
@@ -31,5 +32,7 @@ app.use("/blog-ger/post", blogRouter);
 app.use("/blog-ger/comment", commentRouter);
 //user - following & followedBy
 app.use("/blog-ger/user/:id", userInteractionRouter);
+//search - my post and name
+app.use("/blog-ger/search", searchingRoutes);
 
 export { app };
