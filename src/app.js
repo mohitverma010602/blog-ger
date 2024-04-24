@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.routes.js";
 import profileRouter from "./routes/profile.routes.js";
 import blogRouter from "./routes/post.routes.js";
 import commentRouter from "./routes/comment.routes.js";
+import userInteractionRouter from "./routes/userInteraction.routes.js";
 
 const app = express();
 
@@ -28,5 +29,7 @@ app.use("/blog-ger/profile", profileRouter);
 app.use("/blog-ger/post", blogRouter);
 //comments - update & delete
 app.use("/blog-ger/comment", commentRouter);
+//user - following & followedBy
+app.use("/blog-ger/user/:id", userInteractionRouter);
 
 export { app };
